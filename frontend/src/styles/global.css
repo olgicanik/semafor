@@ -1,0 +1,13 @@
+/* styles/global.css — reset, fonts, base layout */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-app);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+#root { min-height: 100vh; display: flex; flex-direction: column; }
+:focus-visible { outline: 2px solid var(--bosch-light-blue); outline-offset: 2px; }
+code, .mono, time, [data-mono] { font-family: var(--font-mono); }

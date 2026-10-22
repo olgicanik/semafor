@@ -1,0 +1,64 @@
+/* styles/components/analytics.css — AnalyticsView KPIs */
+.analytics {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  flex: 1;
+}
+.analytics__kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.kpi {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-left: 4px solid var(--bosch-light-blue);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.kpi--red { border-left-color: var(--status-red); }
+.kpi--green { border-left-color: var(--status-green); }
+.kpi--amber { border-left-color: var(--status-orange); }
+.kpi__label { font-size: 12px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
+.kpi__value { font-size: 24px; font-weight: 800; color: var(--bosch-navy); }
+.kpi__hint { font-size: 12px; color: var(--text-muted); }
+
+.analytics__card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 14px;
+}
+.analytics__subheading {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--bosch-navy);
+  margin-bottom: 10px;
+}
+.analytics__bars { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.analytics__bar { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.analytics__bar-label { width: 56px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; }
+.analytics__bar-track { flex: 1; height: 8px; border-radius: var(--radius-full); background: var(--bg-app); overflow: hidden; }
+.analytics__bar-fill { height: 100%; border-radius: var(--radius-full); background: var(--status-green); }
+.analytics__bar-value { width: 56px; text-align: right; color: var(--text-secondary); }
+.analytics__muted { font-size: 13px; color: var(--text-muted); }
+.analytics__body { font-size: 13.5px; color: var(--text-primary); }
+.analytics__placeholder {
+  padding: 24px;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-hover);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+.analytics__placeholder-title { font-size: 14px; font-weight: 600; }
+.analytics__placeholder-sub { font-size: 12px; margin-top: 4px; }

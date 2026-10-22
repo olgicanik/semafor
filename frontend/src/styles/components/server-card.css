@@ -1,0 +1,94 @@
+/* styles/components/server-card.css — ServerCard compound presenter */
+.server-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+.server-card:hover { border-color: var(--border-hover); }
+.server-card--red { border-left: 4px solid var(--status-red); }
+.server-card--orange { border-left: 4px solid var(--status-orange); }
+.server-card--green { border-left: 4px solid var(--status-green); }
+.server-card--muted { border-left: 4px solid var(--border-light); }
+
+.server-card__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+.server-card__title-block { min-width: 0; flex: 1; }
+.server-card__head-actions { display: flex; align-items: center; gap: 8px; }
+.server-card__title { font-size: 14px; font-weight: 700; color: var(--bosch-navy); }
+.server-card__addr { font-size: 12px; color: var(--text-muted); }
+.server-card__copy {
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  padding: 1px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-family: inherit;
+}
+.server-card__copy:hover { border-color: var(--bosch-light-blue); color: var(--bosch-dark-blue); }
+
+/* ServerMetricsSummary counter pills */
+.server-metrics {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-light);
+  flex-wrap: wrap;
+}
+.server-metrics__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-app);
+  border: 1px solid var(--border-light);
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+.server-metrics__count { color: var(--text-primary); }
+
+/* ServerPinToggle */
+.pin-toggle {
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-family: inherit;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+.pin-toggle:hover { border-color: var(--bosch-light-blue); color: var(--bosch-dark-blue); }
+.pin-toggle--pinned {
+  background: var(--status-green-bg);
+  color: var(--status-green);
+  border-color: var(--status-green);
+}
+
+/* "pinned" tag (kept for behavior parity with the migrated ServerCard tests) */
+.server-card__pinned {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--status-green);
+  background: var(--status-green-bg);
+  border: 1px solid var(--status-green);
+  border-radius: var(--radius-full);
+  padding: 0 6px;
+}

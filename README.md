@@ -1,6 +1,7 @@
 # Traffic Light — Job Monitoring Dashboard
 
-Mock job-monitoring dashboard: React + Vite + Tailwind frontend, FastAPI backend.
+Mock job-monitoring dashboard: React + Vite frontend (pure CSS, Bosch-branded)
++ FastAPI backend.
 Everything is mocked but modular — swap `backend/auth_adapters.py` and the mock
 job engine for real connectors without touching the routes.
 
@@ -8,7 +9,8 @@ job engine for real connectors without touching the routes.
 
     backend/            FastAPI app (schemas.py, auth_adapters.py, main.py)
                         servers_config.json  local JSON store (seeded on boot)
-    frontend/           Vite + React 19 + Tailwind v4 (src/api, hooks, components)
+    frontend/           Vite + React 19, pure-CSS design system (src/styles tokens,
+                        src/components domain decomposition, src/hooks, src/utils)
     tac_status.py       existing real TAC connector (unused by the mock)
 
 ## Run

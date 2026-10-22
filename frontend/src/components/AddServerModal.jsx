@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import '../styles/components/modal.css'
 
 /**
  * Add-New-Server modal. The auth_type dropdown dynamically swaps the
@@ -71,7 +72,7 @@ export default function AddServerModal({ onClose, onCreate }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 grid place-items-center bg-slate-900/40 p-4"
+      className="modal-backdrop"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -80,89 +81,89 @@ export default function AddServerModal({ onClose, onCreate }) {
       <form
         onSubmit={handleSubmit}
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-md rounded-2xl bg-white p-5 shadow-xl"
+        className="modal"
       >
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-slate-900">Add new server</h2>
-          <button type="button" onClick={onClose} aria-label="Close" className="text-slate-400 hover:text-slate-600">
+        <div className="modal__head">
+          <h2 className="modal__title">Add new server</h2>
+          <button type="button" onClick={onClose} aria-label="Close" className="modal__close">
             ✕
           </button>
         </div>
 
-        <label className="mb-3 flex flex-col gap-1 text-xs font-medium text-slate-500">
-          Server name
-          <input
-            required
-            value={form.name}
-            onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
-            placeholder="e.g. Staging API"
-            className="rounded-md border border-slate-300 px-2 py-1.5 text-sm text-slate-800"
-          />
-        </label>
+        <div className="modal__body">
+          <label className="modal__field">
+            <span className="modal__label">Server name</span>
+            <input
+              required
+              value={form.name}
+              onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
+              placeholder="e.g. Staging API"
+              className="modal__input"
+            />
+          </label>
 
-        <label className="mb-3 flex flex-col gap-1 text-xs font-medium text-slate-500">
-          Environment
-          <select
-            value={form.environment}
-            onChange={(e) => setForm((p) => ({ ...p, environment: e.target.value }))}
-            className="rounded-md border border-slate-300 px-2 py-1.5 text-sm text-slate-800"
-          >
-            <option value="dev">dev</option>
-            <option value="qa">qa</option>
-            <option value="prod">prod</option>
-          </select>
-        </label>
+          <label className="modal__field">
+            <span className="modal__label">Environment</span>
+            <select
+              value={form.environment}
+              onChange={(e) => setForm((p) => ({ ...p, environment: e.target.value }))}
+              className="modal__select"
+            >
+              <option value="dev">dev</option>
+              <option value="qa">qa</option>
+              <option value="prod">prod</option>
+            </select>
+          </label>
 
-        <label className="mb-3 flex flex-col gap-1 text-xs font-medium text-slate-500">
-          Auth method
-          <select
-            value={form.auth_type}
-            onChange={(e) => setAuthType(e.target.value)}
-            data-testid="auth-type"
-            className="rounded-md border border-slate-300 px-2 py-1.5 text-sm text-slate-800"
-          >
-            {Object.entries(AUTH_META).map(([value, m]) => (
-              <option key={value} value={value}>
-                {m.label}
-              </option>
+          <label className="modal__field">
+            <span className="modal__label">Auth method</span>
+            <select
+              value={form.auth_type}
+              onChange={(e) => setAuthType(e.target.value)}
+              data-testid="auth-type"
+              className="modal__select"
+            >
+              {Object.entries(AUTH_META).map(([value, m]) => (
+                <option key={value} value={value}>
+                  {m.label}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          {/* Dynamic credential fields — change with the selected auth method. */}
+          <div className="modal__creds">
+            {meta.fields.map((field) => (
+              <label key={field} className="modal__field">
+                <span className="modal__label">
+                  {field === 'password' ? 'Password' : field.replace(/_/g, ' ')}
+                </span>
+                <input
+                  type={field === 'password' ? 'password' : 'text'} // mask the secret
+                  value={form.auth_credentials[field] ?? ''}
+                  onChange={(e) => setCredential(field, e.target.value)}
+                  placeholder={meta.placeholders[field]}
+                  className="modal__input"
+                />
+              </label>
             ))}
-          </select>
-        </label>
+          </div>
 
-        {/* Dynamic credential fields — change with the selected auth method. */}
-        <div className="mb-4 space-y-3 rounded-lg bg-slate-50 p-3">
-          {meta.fields.map((field) => (
-            <label key={field} className="flex flex-col gap-1 text-xs font-medium text-slate-500">
-              {field === 'password' ? 'Password' : field.replace(/_/g, ' ')}
-              <input
-                type={field === 'password' ? 'password' : 'text'} // v4 G9: mask the secret
-                value={form.auth_credentials[field] ?? ''}
-                onChange={(e) => setCredential(field, e.target.value)}
-                placeholder={meta.placeholders[field]}
-                className="rounded-md border border-slate-300 px-2 py-1.5 text-sm text-slate-800"
-              />
-            </label>
-          ))}
+          {error && (
+            <p role="alert" className="modal__error">
+              {error}
+            </p>
+          )}
         </div>
 
-        {error && (
-          <p role="alert" className="mb-3 rounded-md bg-rose-50 px-3 py-2 text-sm text-rose-700">
-            {error}
-          </p>
-        )}
-
-        <div className="flex justify-end gap-2">
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded-md border border-slate-300 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50"
-          >
+        <div className="modal__foot">
+          <button type="button" onClick={onClose} className="modal__btn">
             Cancel
           </button>
           <button
             type="submit"
             disabled={submitting}
-            className="rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700 disabled:opacity-50"
+            className="modal__btn modal__btn--primary"
           >
             {submitting ? 'Saving…' : 'Add server'}
           </button>

@@ -1,3 +1,6 @@
+import '../styles/components/analytics.css'
+import '../styles/components/badge.css'
+
 /**
  * AnalyticsView — "Analytics & Health" tab: Uptime %, Failure Rate and System
  * Alerts cards, per-environment uptime bars, the most-unstable server callout,
@@ -6,13 +9,13 @@
 
 const ALERT_THRESHOLD = 3
 
-function KpiCard({ label, value, hint, tone = 'emerald' }) {
-  const tones = { emerald: 'text-emerald-600', rose: 'text-rose-600', amber: 'text-amber-600' }
+function KpiCard({ label, value, hint, tone = 'green' }) {
+  const tones = { green: 'kpi kpi--green', rose: 'kpi kpi--red', amber: 'kpi kpi--amber' }
   return (
-    <div className="rounded-xl bg-white p-5 shadow-sm">
-      <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{label}</p>
-      <p className={`mt-1 text-3xl font-bold ${tones[tone] ?? 'text-slate-900'}`}>{value}</p>
-      <p className="mt-1 text-xs text-slate-400">{hint}</p>
+    <div className={tones[tone] ?? 'kpi'}>
+      <p className="kpi__label">{label}</p>
+      <p className="kpi__value">{value}</p>
+      <p className="kpi__hint">{hint}</p>
     </div>
   )
 }
@@ -29,16 +32,16 @@ export default function AnalyticsView({ analytics, servers = [] }) {
     0,
   )
   const alertLevel = activeRedJobs >= ALERT_THRESHOLD ? 'Critical' : activeRedJobs > 0 ? 'Warning' : 'Healthy'
-  const alertTone = alertLevel === 'Healthy' ? 'emerald' : alertLevel === 'Warning' ? 'amber' : 'rose'
+  const alertTone = alertLevel === 'Healthy' ? 'green' : alertLevel === 'Warning' ? 'amber' : 'rose'
 
   // The backend returns the most-unstable server id; surface its display name.
   const unstableId = analytics?.most_unstable_server
   const unstableName = servers.find((s) => s.id === unstableId)?.name ?? unstableId
 
   return (
-    <div className="space-y-6">
+    <div className="analytics">
       {/* KPI cards */}
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="analytics__kpis">
         <KpiCard label="Uptime" value={`${uptimeAvg.toFixed(1)}%`} hint="avg across environments" />
         <KpiCard
           label="Failure Rate"
@@ -50,36 +53,36 @@ export default function AnalyticsView({ analytics, servers = [] }) {
       </div>
 
       {/* Per-environment uptime detail */}
-      <div className="rounded-xl bg-white p-4 shadow-sm">
-        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+      <div className="analytics__card">
+        <h3 className="analytics__subheading">
           Uptime by environment
         </h3>
         {envUptimes.length > 0 ? (
-          <ul className="space-y-2">
+          <ul className="analytics__bars">
             {envUptimes.map((u) => (
-              <li key={u.environment} className="flex items-center gap-3 text-sm">
-                <span className="w-16 font-medium text-slate-600">{u.environment}</span>
-                <div className="h-2 flex-1 overflow-hidden rounded bg-slate-100">
+              <li key={u.environment} className="analytics__bar">
+                <span className="analytics__bar-label">{u.environment}</span>
+                <div className="analytics__bar-track">
                   <div
-                    className="h-full rounded bg-emerald-500"
+                    className="analytics__bar-fill"
                     style={{ width: `${u.average_uptime_percent}%` }}
                   />
                 </div>
-                <span className="w-14 text-right text-slate-500">{u.average_uptime_percent}%</span>
+                <span className="analytics__bar-value" data-mono>{u.average_uptime_percent}%</span>
               </li>
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-slate-400">No analytics data yet.</p>
+          <p className="analytics__muted">No analytics data yet.</p>
         )}
       </div>
 
       {/* Most-unstable server callout */}
-      <div className="rounded-xl bg-white p-4 shadow-sm">
-        <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-slate-500">
+      <div className="analytics__card">
+        <h3 className="analytics__subheading">
           Most unstable server
         </h3>
-        <p className="text-sm text-slate-600">
+        <p className="analytics__body">
           {unstableName
             ? `Server "${unstableName}" has the most red state transitions.`
             : 'No red transitions recorded yet — everything looks stable.'}
@@ -88,9 +91,9 @@ export default function AnalyticsView({ analytics, servers = [] }) {
 
       {/* Historical graphs placeholder */}
       {/* INTEGRATE RECHARTS/CHART.JS HERE FOR HISTORICAL GRAPHS */}
-      <div className="rounded-xl border-2 border-dashed border-slate-300 bg-white p-10 text-center text-slate-400">
-        <p className="text-sm font-medium">Historical graphs</p>
-        <p className="mt-1 text-xs">
+      <div className="analytics__placeholder">
+        <p className="analytics__placeholder-title">Historical graphs</p>
+        <p className="analytics__placeholder-sub">
           Recharts / Chart.js goes here: per-server uptime over time, red-error timeline, …
         </p>
       </div>
