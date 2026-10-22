@@ -1,0 +1,275 @@
+[
+  {
+    "id": "srv-prod-mainframe",
+    "name": "Prod Mainframe Bridge",
+    "environment": "prod",
+    "auth_type": "ssh",
+    "auth_credentials": {
+      "token": null,
+      "username": null,
+      "password": null,
+      "ssh_private_key": "/keys/prod_mainframe",
+      "proxy_url": null
+    },
+    "is_pinned": true,
+    "history": [
+      {
+        "status": "red",
+        "timestamp": "2026-10-22T08:05:00Z",
+        "error_count": 1
+      },
+      {
+        "status": "red",
+        "timestamp": "2026-10-22T02:10:00Z",
+        "error_count": 1
+      },
+      {
+        "status": "red",
+        "timestamp": "2026-10-21T20:30:00Z",
+        "error_count": 1
+      },
+      {
+        "status": "green",
+        "timestamp": "2026-10-21T09:00:00Z",
+        "error_count": 0
+      },
+      {
+        "status": "yellow",
+        "timestamp": "2026-10-20T19:00:00Z",
+        "error_count": 0
+      }
+    ],
+    "jobs": [
+      {
+        "id": "job-mf-sync",
+        "name": "Payroll Sync",
+        "status": "green",
+        "last_run": "2026-10-22T08:00:00Z",
+        "message": "Running - all checks passing"
+      },
+      {
+        "id": "job-mf-report",
+        "name": "Daily Ops Report",
+        "status": "red",
+        "last_run": "2026-10-22T08:05:00Z",
+        "message": "Error - last run failed"
+      },
+      {
+        "id": "job-mf-archive",
+        "name": "Archive Rotation",
+        "status": "yellow",
+        "last_run": "2026-10-22T07:50:00Z",
+        "message": "Stopped - paused, waiting for a slot"
+      }
+    ]
+  },
+  {
+    "id": "srv-dev-gateway",
+    "name": "Dev API Gateway",
+    "environment": "dev",
+    "auth_type": "api_key",
+    "auth_credentials": {
+      "token": "dev-token-7f3a",
+      "username": null,
+      "password": null,
+      "ssh_private_key": null,
+      "proxy_url": null
+    },
+    "is_pinned": true,
+    "history": [
+      {
+        "status": "green",
+        "timestamp": "2026-10-22T08:15:00Z",
+        "error_count": 0
+      },
+      {
+        "status": "green",
+        "timestamp": "2026-10-21T16:00:00Z",
+        "error_count": 0
+      },
+      {
+        "status": "green",
+        "timestamp": "2026-10-21T09:30:00Z",
+        "error_count": 0
+      }
+    ],
+    "jobs": [
+      {
+        "id": "job-gw-auth",
+        "name": "OAuth Token Refresh",
+        "status": "green",
+        "last_run": "2026-10-22T08:15:00Z",
+        "message": "Running - all checks passing"
+      },
+      {
+        "id": "job-gw-sync",
+        "name": "Config Sync",
+        "status": "yellow",
+        "last_run": "2026-10-22T07:40:00Z",
+        "message": "Stopped - paused, waiting for a slot"
+      },
+      {
+        "id": "job-gw-metrics",
+        "name": "Metrics Export",
+        "status": "green",
+        "last_run": "2026-10-22T08:00:00Z",
+        "message": "Running - all checks passing"
+      }
+    ]
+  },
+  {
+    "id": "srv-qa-payments",
+    "name": "QA Payments Core",
+    "environment": "qa",
+    "auth_type": "basic_auth",
+    "auth_credentials": {
+      "token": null,
+      "username": "qa_bot",
+      "password": "qa-pass-123",
+      "ssh_private_key": null,
+      "proxy_url": null
+    },
+    "is_pinned": false,
+    "history": [
+      {
+        "status": "green",
+        "timestamp": "2026-10-22T08:20:00Z",
+        "error_count": 0
+      },
+      {
+        "status": "red",
+        "timestamp": "2026-10-22T08:05:00Z",
+        "error_count": 1
+      },
+      {
+        "status": "green",
+        "timestamp": "2026-10-21T18:45:00Z",
+        "error_count": 0
+      },
+      {
+        "status": "yellow",
+        "timestamp": "2026-10-21T11:00:00Z",
+        "error_count": 0
+      }
+    ],
+    "jobs": [
+      {
+        "id": "job-pay-authz",
+        "name": "Authorization Checks",
+        "status": "green",
+        "last_run": "2026-10-22T08:20:00Z",
+        "message": "Running - all checks passing"
+      },
+      {
+        "id": "job-pay-settle",
+        "name": "Settlement Run",
+        "status": "red",
+        "last_run": "2026-10-22T08:05:00Z",
+        "message": "Error - last run failed"
+      },
+      {
+        "id": "job-pay-recon",
+        "name": "Reconciliation",
+        "status": "green",
+        "last_run": "2026-10-22T07:55:00Z",
+        "message": "Running - all checks passing"
+      }
+    ]
+  },
+  {
+    "id": "srv-qa-pipeline",
+    "name": "QA Data Pipeline",
+    "environment": "qa",
+    "auth_type": "proxy",
+    "auth_credentials": {
+      "token": null,
+      "username": null,
+      "password": null,
+      "ssh_private_key": null,
+      "proxy_url": "http://proxy-qa:8080"
+    },
+    "is_pinned": true,
+    "history": [
+      {
+        "status": "red",
+        "timestamp": "2026-10-22T08:00:00Z",
+        "error_count": 1
+      },
+      {
+        "status": "green",
+        "timestamp": "2026-10-21T19:00:00Z",
+        "error_count": 0
+      },
+      {
+        "status": "red",
+        "timestamp": "2026-10-21T12:15:00Z",
+        "error_count": 1
+      }
+    ],
+    "jobs": [
+      {
+        "id": "job-pl-ingest",
+        "name": "Raw Ingestion",
+        "status": "yellow",
+        "last_run": "2026-10-22T08:10:00Z",
+        "message": "Stopped - paused, waiting for a slot"
+      },
+      {
+        "id": "job-pl-transform",
+        "name": "Feature Transform",
+        "status": "green",
+        "last_run": "2026-10-22T07:30:00Z",
+        "message": "Running - all checks passing"
+      },
+      {
+        "id": "job-pl-publish",
+        "name": "Dataset Publish",
+        "status": "red",
+        "last_run": "2026-10-22T08:00:00Z",
+        "message": "Error - last run failed"
+      }
+    ]
+  },
+  {
+    "id": "srv-prod-fraud",
+    "name": "Prod Fraud Scanner",
+    "environment": "prod",
+    "auth_type": "api_key",
+    "auth_credentials": {
+      "token": "prod-token-9912",
+      "username": null,
+      "password": null,
+      "ssh_private_key": null,
+      "proxy_url": null
+    },
+    "is_pinned": false,
+    "history": [
+      {
+        "status": "green",
+        "timestamp": "2026-10-22T08:25:00Z",
+        "error_count": 0
+      },
+      {
+        "status": "green",
+        "timestamp": "2026-10-21T17:30:00Z",
+        "error_count": 0
+      }
+    ],
+    "jobs": [
+      {
+        "id": "job-fr-scan",
+        "name": "Transaction Scan",
+        "status": "green",
+        "last_run": "2026-10-22T08:25:00Z",
+        "message": "Running - all checks passing"
+      },
+      {
+        "id": "job-fr-flag",
+        "name": "Flag Review Sync",
+        "status": "green",
+        "last_run": "2026-10-22T07:20:00Z",
+        "message": "Running - all checks passing"
+      }
+    ]
+  }
+]

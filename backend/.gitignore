@@ -1,0 +1,6 @@
+# Traffic Light backend — generated artifacts (frontend has its own .gitignore
+# from the Vite scaffold: node_modules/, dist/, etc.).
+.venv/
+__pycache__/
+*.pyc
+*.json.tmp   # atomic-write sibling; renamed over servers_config.json by os.replace
