@@ -1,0 +1,18 @@
+/* web/src/App.css (excerpt) */
+.app { font-family: system-ui, sans-serif; max-width: 1200px; margin: 0 auto; padding: 16px; }
+.server-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+.card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px 16px; cursor: pointer; }
+.dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; }
+.dot-green { background: #22c55e; } .dot-orange { background: #f59e0b; }
+.dot-red { background: #ef4444; } .dot-grey { background: #9ca3af; }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.15; } }
+.blink { animation: blink 1s steps(2, start) infinite; }
+.counts { display: flex; gap: 12px; font-size: 0.9rem; }
+.job-panel { border-top: 1px solid #eee; margin-top: 8px; overflow: auto; max-height: 320px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+td, th { padding: 4px 6px; text-align: left; border-bottom: 1px solid #f3f4f6; }
+tr.red { background: #fef2f2; } tr.orange { background: #fffbeb; }
+.detail { position: fixed; right: 16px; top: 16px; width: 420px; background: #fff;
+  border: 1px solid #d1d5db; border-radius: 8px; padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+pre { white-space: pre-wrap; word-break: break-word; font-size: 0.8rem; background: #f9fafb; padding: 8px; }
+.ai-verdict { margin-top: 12px; padding: 10px; background: #eff6ff; border-radius: 6px; }
