@@ -119,8 +119,8 @@ describe('DashboardLayout (integrated through App)', () => {
   it('pins a server optimistically and calls the backend endpoint', async () => {
     render(<App />)
     const aceCard = (await screen.findByText('Ace QA')).closest('article')
-    await userEvent.click(within(aceCard).getByRole('button', { name: 'Pin' }))
-    expect(await within(aceCard).findByRole('button', { name: 'Unpin' })).toBeInTheDocument()
+    await userEvent.click(within(aceCard).getByRole('button', { name: 'Pin server' }))
+    expect(await within(aceCard).findByRole('button', { name: 'Unpin server' })).toBeInTheDocument()
     expect(pinServer).toHaveBeenCalledWith('srv-qa2')
   })
 

@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import Supergraphic from '../../common/Supergraphic.jsx';
-import EnvironmentBadge from '../environment/EnvironmentBadge.jsx';
 import '../../../styles/components/server-card.css';
 
 /**
  * ServerHeader — server title (name), monospace address (server.id, the "IP" slot),
- * a copy button, the EnvironmentBadge and children (pin toggle / health badge slots).
+ * a copy button and children (pin toggle / health badge slots).
+ * The per-card environment pill was removed (2026-10): the active environment is
+ * already shown by EnvironmentTabs and the DashboardLayout group heading.
  */
 export default function ServerHeader({ server, children }) {
   const [copied, setCopied] = useState(false);
@@ -29,7 +30,6 @@ export default function ServerHeader({ server, children }) {
                   aria-label={`Copy address for ${server.name}`}>
             {copied ? 'Copied!' : 'Copy'}
           </button>
-          <EnvironmentBadge env={server.environment} />
           {children}
         </div>
       </div>

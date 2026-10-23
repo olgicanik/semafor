@@ -52,17 +52,29 @@ describe('ServerCard (composed presenter)', () => {
     expect(screen.queryByText('Recon')).not.toBeInTheDocument();
   });
 
-  it('shows the pinned badge and Unpin button when pinned', () => {
+  it('shows the pinned toggle as a single icon button in the pinned state', () => {
     render(<ServerCard server={server} pinned onTogglePin={() => {}} />);
-    expect(screen.getByText('pinned')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Unpin' })).toBeInTheDocument();
+    const pin = screen.getByRole('button', { name: 'Unpin server' });
+    expect(pin).toHaveAttribute('aria-pressed', 'true');
+    expect(pin.querySelector('svg')).not.toBeNull();      // icon-only — no text badge
+    expect(screen.queryByText('pinned')).not.toBeInTheDocument();
+    expect(screen.queryByText('Unpin')).not.toBeInTheDocument();
   });
 
   it('calls onTogglePin with the server id when Pin is clicked', async () => {
     const onTogglePin = vi.fn();
     render(<ServerCard server={server} onTogglePin={onTogglePin} />);
-    await userEvent.click(screen.getByRole('button', { name: 'Pin' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Pin server' }));
     expect(onTogglePin).toHaveBeenCalledWith('srv-1');
+  });
+
+  it('does not repeat the environment label inside the card header', () => {
+    // Fixture server.environment is 'qa' → 'QA'. The per-card env pill was removed
+    // (the active environment is shown by EnvironmentTabs and the group heading), so
+    // 'QA' must not appear anywhere in the card. Exact-match queryByText('QA') cannot
+    // hit the combined 'QA Payments' title node, so this fires only on a re-added pill.
+    render(<ServerCard server={server} onTogglePin={() => {}} />);
+    expect(screen.queryByText('QA')).not.toBeInTheDocument();
   });
 
   it('routes a job badge click upward via onShowServerErrors (with the job)', async () => {
@@ -121,14 +133,18 @@ describe('ServerHealthBadge', () => {
 });
 
 describe('ServerPinToggle', () => {
-  it('renders Pin/Unpin with aria-pressed and calls onToggle', async () => {
+  it('renders an accessible icon toggle with aria-pressed and calls onToggle', async () => {
     const onToggle = vi.fn();
     const { rerender } = render(<ServerPinToggle pinned={false} onToggle={onToggle} />);
-    const pin = screen.getByRole('button', { name: 'Pin' });
+    const pin = screen.getByRole('button', { name: 'Pin server' });
     expect(pin).toHaveAttribute('aria-pressed', 'false');
+    expect(pin).toHaveAttribute('title', 'Pin to top');
+    expect(pin.querySelector('svg')).not.toBeNull();     // icon only — no visible text
     await userEvent.click(pin);
     expect(onToggle).toHaveBeenCalled();
     rerender(<ServerPinToggle pinned onToggle={onToggle} />);
-    expect(screen.getByRole('button', { name: 'Unpin' })).toHaveAttribute('aria-pressed', 'true');
+    const unpin = screen.getByRole('button', { name: 'Unpin server' });
+    expect(unpin).toHaveAttribute('aria-pressed', 'true');
+    expect(unpin).toHaveAttribute('title', 'Unpin server');
   });
 });

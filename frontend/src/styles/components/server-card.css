@@ -56,35 +56,37 @@
 }
 .server-metrics__count { color: var(--text-primary); }
 
-/* ServerPinToggle */
-.pin-toggle {
-  border: 1px solid var(--border-light);
-  background: var(--bg-surface);
+/* ServerPinToggle — single icon-only pin button (no text labels, no green) */
+.server-pin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  background: transparent;
   border-radius: var(--radius-sm);
-  padding: 2px 10px;
-  font-size: 12px;
-  font-weight: 600;
+  color: var(--text-muted);            /* #94A3B8 — outline pin, unpinned */
   cursor: pointer;
-  color: var(--text-secondary);
-  font-family: inherit;
-  transition: border-color var(--transition-fast), color var(--transition-fast);
+  line-height: 0;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
 }
-.pin-toggle:hover { border-color: var(--bosch-light-blue); color: var(--bosch-dark-blue); }
-.pin-toggle--pinned {
-  background: var(--status-green-bg);
-  color: var(--status-green);
-  border-color: var(--status-green);
+.server-pin-btn svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  transform-origin: center;
+  transition: transform 150ms ease;
 }
-
-/* "pinned" tag (kept for behavior parity with the migrated ServerCard tests) */
-.server-card__pinned {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--status-green);
-  background: var(--status-green-bg);
-  border: 1px solid var(--status-green);
-  border-radius: var(--radius-full);
-  padding: 0 6px;
+.server-pin-btn:hover {
+  color: var(--text-secondary);        /* #64748B — hover darkens muted icon */
+  background: rgba(0, 0, 0, 0.04);     /* transparent hover pill */
 }
+.server-pin-btn:hover svg { transform: scale(1.1); }
+.server-pin-btn:active svg { transform: scale(0.92); }
+/* pinned state: solid Bosch dark blue pin — never green */
+.server-pin-btn--pinned { color: var(--bosch-dark-blue); }        /* #005691 */
+.server-pin-btn--pinned svg { fill: currentColor; stroke: none; }
+/* keep the pinned blue while hovered (else the :hover gray above wins on source order) */
+.server-pin-btn--pinned:hover { color: var(--bosch-dark-blue); }

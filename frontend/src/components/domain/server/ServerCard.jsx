@@ -19,8 +19,7 @@ export default function ServerCard({
     <article className="server-card" data-testid={`server-${server.id}`}>
       <ServerHeader server={server}>
         <ServerHealthBadge jobs={server.jobs} />
-        {pinned && <span className="server-card__pinned">pinned</span>}
-        <ServerPinToggle pinned={pinned} onToggle={() => onTogglePin(server.id)} label={pinned ? 'Unpin' : 'Pin'} />
+        <ServerPinToggle pinned={pinned} onToggle={() => onTogglePin(server.id)} />
       </ServerHeader>
       <ServerMetricsSummary jobs={server.jobs} />
       <JobList jobs={visibleJobs}
