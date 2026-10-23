@@ -1,0 +1,6 @@
+/* styles/components/supergraphic.css — Bosch signature accent bar */
+.supergraphic {
+  height: var(--supergraphic-height);
+  background: var(--supergraphic-gradient);
+  flex: none;
+}

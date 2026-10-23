@@ -1,0 +1,30 @@
+/* styles/animations.css — semaphore pulse + polling progress, reduced-motion safe */
+
+@keyframes pulse-dot {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--status-green) 45%, transparent); }
+  70%  { box-shadow: 0 0 0 6px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+/* Status-colored pulse: duration varies per severity (red alerts faster). */
+.sema-dot--green.sema-dot--pulse { animation: pulse-dot 1.8s ease-out infinite; }
+.sema-dot--orange.sema-dot--pulse { animation: pulse-dot 2.2s ease-out infinite; }
+.sema-dot--red.sema-dot--pulse { animation: pulse-dot 1.2s ease-out infinite; }
+
+@keyframes poll-progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+.poll-progress__fill {
+  animation: poll-progress var(--poll-interval) linear forwards;
+  transform-origin: left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

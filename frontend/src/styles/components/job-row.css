@@ -1,0 +1,38 @@
+/* styles/components/job-row.css — JobRow / JobList */
+.job-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+}
+.job-row:hover { background: color-mix(in srgb, var(--bosch-light-blue) 6%, transparent); }
+.job-row__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+.job-row__name { font-weight: 600; color: var(--text-primary); }
+.job-row--compact .job-row__name { font-weight: 500; }
+.job-row__project { font-size: 12px; color: var(--text-secondary); }
+.job-row__id { font-size: 11px; color: var(--text-muted); }
+.job-row__time { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+
+.job-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.job-list__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 6px 8px;
+  font-family: inherit;
+}
+.job-list__head:hover { color: var(--bosch-dark-blue); }
+.job-list__empty { padding: 8px; font-size: 13px; color: var(--text-muted); }

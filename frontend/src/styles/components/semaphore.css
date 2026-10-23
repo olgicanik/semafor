@@ -1,0 +1,16 @@
+/* styles/components/semaphore.css — SemaphoreDot indicator dot */
+.sema-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--border-light);
+  flex: none;
+}
+.sema-dot--green { background: var(--status-green); }
+.sema-dot--orange { background: var(--status-orange); }
+.sema-dot--red { background: var(--status-red); }
+.sema-dot--muted { background: var(--border-light); }
+.sema-dot--sm { width: 6px; height: 6px; }
+.sema-dot--md { width: 8px; height: 8px; }
+.sema-dot--lg { width: 12px; height: 12px; }

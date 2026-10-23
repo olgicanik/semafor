@@ -1,0 +1,27 @@
+/* styles/components/badge.css — shared pill badges (job status / server health / platform / env) */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.badge--green { background: var(--status-green-bg); color: var(--status-green); border-color: var(--status-green); }
+.badge--orange { background: var(--status-orange-bg); color: var(--status-orange); border-color: var(--status-orange); }
+.badge--red { background: var(--status-red-bg); color: var(--status-red); border-color: var(--status-red); }
+.badge--muted { background: var(--bg-surface); color: var(--text-muted); border-color: var(--border-light); }
+.badge--blue { background: color-mix(in srgb, var(--bosch-light-blue) 10%, var(--bg-surface)); color: var(--bosch-dark-blue); border-color: var(--bosch-light-blue); }
+
+/* button-shaped badge (JobStatusBadge opens the error drawer) */
+.badge--button {
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+.badge--button:hover { border-color: var(--bosch-light-blue); }
+.badge--button:focus-visible { outline: 2px solid var(--bosch-light-blue); outline-offset: 2px; }

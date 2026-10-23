@@ -1,0 +1,41 @@
+/* styles/components/tabs.css — EnvironmentTabs */
+.env-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid var(--border-light);
+  padding: 0 12px;
+}
+.env-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+.env-tab:hover { color: var(--bosch-dark-blue); }
+.env-tab--active {
+  color: var(--bosch-dark-blue);
+  border-bottom-color: var(--bosch-dark-blue);
+}
+.env-tab__count {
+  background: var(--bg-app);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  padding: 0 6px;
+  color: var(--text-secondary);
+}
+.env-tab--active .env-tab__count {
+  background: color-mix(in srgb, var(--bosch-light-blue) 12%, var(--bg-surface));
+  border-color: var(--bosch-light-blue);
+  color: var(--bosch-dark-blue);
+}
