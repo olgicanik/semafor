@@ -10,10 +10,6 @@
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 .server-card:hover { border-color: var(--border-hover); }
-.server-card--red { border-left: 4px solid var(--status-red); }
-.server-card--orange { border-left: 4px solid var(--status-orange); }
-.server-card--green { border-left: 4px solid var(--status-green); }
-.server-card--muted { border-left: 4px solid var(--border-light); }
 
 .server-card__header {
   display: flex;

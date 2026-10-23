@@ -73,6 +73,17 @@ describe('ServerCard (composed presenter)', () => {
     await userEvent.click(within(redRow).getByText('Critical'));
     expect(onShowServerErrors).toHaveBeenCalledWith(server.jobs[0]);
   });
+
+  it('does not render the health modifier class on the card (left traffic light removed)', () => {
+    // server-card--{red|orange|green|muted} previously painted a 4px status-colored
+    // border-left rail — the "left traffic light". See refine plan §3 decision 1.
+    // `environment` mirrors the file's server fixture shape (ServerHeader → EnvironmentBadge);
+    // `health` is passed only to prove a health value no longer maps to a visual modifier.
+    render(<ServerCard server={{ id: 'srv-t', name: 'Rail Check', environment: 'dev', health: 'red', jobs: [] }} onTogglePin={() => {}} />);
+    const card = screen.getByTestId('server-srv-t');
+    expect(card.className).toContain('server-card');
+    expect(card.className).not.toMatch(/server-card--(red|orange|green|muted)/);
+  });
 });
 
 describe('ServerHeader', () => {

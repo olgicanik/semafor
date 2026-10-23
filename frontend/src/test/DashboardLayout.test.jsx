@@ -182,4 +182,12 @@ describe('DashboardLayout (integrated through App)', () => {
     await screen.findByText('Alpha Dev')
     expect(within(screen.getByTestId('env-tab-all')).getByText('3')).toBeInTheDocument()
   })
+
+  it('renders each category group as a section holding its server cards as direct children (2-col CSS grid support)', async () => {
+    render(<App />)
+    await screen.findByText('Alpha Dev');          // wait for the polled fixture (default All tab)
+    const group = screen.getByTestId('group-all'); // single category group on the All tab
+    const card = screen.getByTestId('server-srv-dev'); // <article> (fixture srv-dev)
+    expect(card.parentElement).toBe(group);        // cards are siblings inside the group section
+  })
 })

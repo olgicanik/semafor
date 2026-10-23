@@ -16,7 +16,7 @@ export default function ServerCard({
   const visibleJobs = statusFilter === 'all'
     ? server.jobs : server.jobs.filter((job) => job.status === statusFilter);
   return (
-    <article className={`server-card server-card--${server.health ?? 'muted'}`} data-testid={`server-${server.id}`}>
+    <article className="server-card" data-testid={`server-${server.id}`}>
       <ServerHeader server={server}>
         <ServerHealthBadge jobs={server.jobs} />
         {pinned && <span className="server-card__pinned">pinned</span>}
